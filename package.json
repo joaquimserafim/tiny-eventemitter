@@ -1,0 +1,30 @@
+{
+  "name": "tiny-eventemitter",
+  "version": "0.0.0",
+  "description": "Tiny and very simples event emitter for Node.js and the browser",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joaquimserafim/tiny-eventemitter.git"
+  },
+  "keywords": [
+    "events",
+    "eventemitter",
+    "browser"
+  ],
+  "author": "@joaquimserafim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaquimserafim/tiny-eventemitter/issues"
+  },
+  "homepage": "https://github.com/joaquimserafim/tiny-eventemitter",
+  "devDependencies": {
+    "tape": "~2.3.2"
+  }
+}
