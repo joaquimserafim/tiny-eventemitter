@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/joaquimserafim/tiny-eventemitter.png?branch=master)](https://travis-ci.org/joaquimserafim/tiny-eventemitter)
 
 
-Tiny and very simples eventemitter that can be used in Node.js but the major target is to use in the browser with browserify.
+Tiny and very simple eventemitter that can be used in Node.js but the major target is to use in the browser with browserify.
 
 
 ##Desc
