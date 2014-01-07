@@ -12,12 +12,12 @@ Tiny and very simples eventemitter that can be used in Node.js but the major tar
     
     EventEmitter
     
-    mehtods:
+    methods:
         emit('event', [arg1], [arg2], [...])
         on('event', callback(*))
         once('event', callback(*)) // run once
-        remove([event])            // remove one or all listeners
-        listeners()                // return activ events
+        remove([event])            // remove one or all events
+        listeners()                // return active events
         
         
     * An Array-like object corresponding to the arguments passed to a function. 

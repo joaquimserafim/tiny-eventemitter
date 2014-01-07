@@ -1,6 +1,6 @@
 {
   "name": "tiny-eventemitter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Tiny and very simples event emitter for Node.js and the browser",
   "main": "index.js",
   "directories": {
