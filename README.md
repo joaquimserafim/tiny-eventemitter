@@ -4,42 +4,74 @@
 
 [![Build Status](https://travis-ci.org/joaquimserafim/tiny-eventemitter.png?branch=master)](https://travis-ci.org/joaquimserafim/tiny-eventemitter)
 
+[![browser support](https://ci.testling.com/joaquimserafim/tiny-eventemitter.png)](https://ci.testling.com/joaquimserafim/tiny-eventemitter)
 
-Tiny and very simple eventemitter that can be used in Node.js but the major target is to use in the browser with browserify.
 
+Tiny and very simple eventemitter that can be used in Node.js and the browser.
+
+**V1.1**
 
 ##Desc
     
-    EventEmitter
     
     methods:
         emit('event', [arg1], [arg2], [...])
-        on('event', callback(*))
-        once('event', callback(*)) // run once
-        remove([event])            // remove one or all events
-        listeners()                // return active events
+        on('event', callback([arg1], [arg2], [...]))
+        once('event', callback([arg1], [arg2], [...])) // run once
+        remove([event])                                // remove one or all events
+        listeners()                                    // return active events
         
         
-    * An Array-like object corresponding to the arguments passed to a function. 
+  
 
-
-
-##Usage
+##Example
     
     
     
-      var EventEmitter = require('tiny-eventemitter');
-      
-      var em = new EventEmitter();
-      
-      em.on('hello', function (args) {
-        console.log(args);// arguments array
-      });
+    var EventEmitter = require('tiny-eventemitter');
+    
+    var em = new EventEmitter();
+    
+    em.on('hello', function (arg1, arg2) {
+        console.log(arg1 + ' ' + arg2);
+    });
 
-      em.emit('hello', 'Hello', ' ', 'World');
-      // will be ['Hello', ' ', 'World']
+    em.emit('hello', 'Hello', 'World');
 
-      em.remove('hello');
+    em.remove('hello');
+    
+    
+    
+    
+    // Inherit from tiny-eventemitter
+    
+    var inherits = require('util').inherits;   
+    var EventEmitter = require('tiny-eventemitter');
+    
+    
+    
+    function DummyTest () {
+      EventEmitter.call(this);
+    }
+    
+    inherits(DummyTest, EventEmitter);
+    
+    DummyTest.prototype.write = function (client, msg) {
+      this.emit('msg', client, msg);
+    };
+    
+    
+    var dummy = new DummyTest();
+    
+    console.log(dummy instanceof EventEmitter);
+    console.log(DummyTest.super_ === EventEmitter);
+    
+    
+    dummy.on('msg', function (client, msg) {
+      console.log(client + ': ' + msg);
+    });
+    
+    dummy.write(12, 'Hello World!!!');
       
       
     

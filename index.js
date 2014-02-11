@@ -39,10 +39,10 @@ EventEmitter.prototype.once = function (type, listener) {
 EventEmitter.prototype.remove = function (type) {
   if (type) {
     delete this._listeners[type];
-  } else {
-    for (var e in this._listeners)
-      delete this._listeners[e];
+    return this;
   }
+
+  for (var e in this._listeners) delete this._listeners[e];
 
   return this;
 };
@@ -51,10 +51,10 @@ EventEmitter.prototype.emit = function (type) {
   if (!this._listeners[type])
     throw new Error('Event "' + type + '" don\'t exists');
 
-  var args = Array.prototype.slice.call(arguments).slice(1);
+  var args = Array.prototype.slice.call(arguments, 1);
 
   // exec event
-  this._listeners[type].fn(args);
+  this._listeners[type].fn.apply(this, args);
 
   // remove events that run only once
   if (this._listeners[type].once) this.remove(type);
