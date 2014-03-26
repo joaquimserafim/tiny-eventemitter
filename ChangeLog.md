@@ -7,3 +7,8 @@
 
 * Support for Inheritance
 * Changed the way arguments were passed in emitters callbacks
+
+
+2014.03.26, Version 1.2.0
+
+* Add an defer emitter

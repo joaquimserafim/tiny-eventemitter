@@ -9,13 +9,14 @@
 
 Tiny and very simple eventemitter that can be used in Node.js and the browser.
 
-**V1.1**
+**V1.2**
 
 ##Desc
     
     
     methods:
         emit('event', [arg1], [arg2], [...])
+        deferEmit('event', [arg1], [arg2], [...])
         on('event', callback([arg1], [arg2], [...]))
         once('event', callback([arg1], [arg2], [...])) // run once
         remove([event])                                // remove one or all events
@@ -72,6 +73,28 @@ Tiny and very simple eventemitter that can be used in Node.js and the browser.
     });
     
     dummy.write(12, 'Hello World!!!');
+    
+    
+    
+    
+    // using an defer emitter
+    
+    var em = new EventEmitter();
+
+    em.on('hello', function (arg) {
+        console.log(arg);
+    });
+    
+    process.nextTick(function () {
+      console.log('nextTick => will call after "first" & "second" emits but before the "end" emitter');
+    });
+    
+    // note: in this example put "process.nextTick" before purposely
+    // deferEmit must be declare/write/emit after "process.nextTick"
+    em.deferEmit('hello', 'this will be emit in end');
+    
+    em.emit('hello', 'this will emit first');
+    em.emit('hello', 'this will emit in second');
       
       
     

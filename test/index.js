@@ -1,9 +1,7 @@
 var test = require('tape');
-var inherits = require('util').inherits;   
+var inherits = require('util').inherits;
 
 var EventEmitter = require('../');
-
-
 
 
 test('tiny-eventemitter - simples', function (t) {
@@ -77,3 +75,27 @@ test('tiny-eventemitter - inherit', function (t) {
 });
 
 
+test('using defer emit', function (t) {
+  t.plan(4);
+
+  var steps = ['first', 'second', 'nextTick', 'lasted'];
+
+  var em = new EventEmitter();
+
+  em.on('hello', function (arg) {
+     var index = steps.indexOf(arg);
+     var rm = steps.shift(index);
+     t.equal(index > -1, true,  rm +' emitted');
+  });
+
+  process.nextTick(function () {
+    var index = steps.indexOf('nextTick');
+    var rm = steps.shift(index);
+    t.equal(index > -1, true,  rm +' called');
+  });
+
+  em.deferEmit('hello', 'lasted');
+
+  em.emit('hello', 'first');
+  em.emit('hello', 'second');
+});

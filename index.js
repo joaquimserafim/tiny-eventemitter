@@ -61,3 +61,22 @@ EventEmitter.prototype.emit = function (type) {
   
   return this;
 };
+
+EventEmitter.prototype.deferEmit = function (type) {
+  var self = this;
+
+  if (!self._listeners[type])
+    throw new Error('Event "' + type + '" don\'t exists');
+
+  var args = Array.prototype.slice.call(arguments, 1);
+
+  process.nextTick(function () {
+    // exec event
+    self._listeners[type].fn.apply(self, args);
+
+    // remove events that run only once
+    if (self._listeners[type].once) self.remove(type);
+  });
+
+  return self;
+};
